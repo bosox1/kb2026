@@ -11,7 +11,7 @@ export default function MatrixResult({ value }) {
 
     let iterations = 0;
     const target = value;
-    const maxIter = 18;
+    const maxIter = 35;
 
     clearInterval(intervalRef.current);
     intervalRef.current = setInterval(() => {
@@ -27,7 +27,7 @@ export default function MatrixResult({ value }) {
         setDisplay(target);
         clearInterval(intervalRef.current);
       }
-    }, 55);
+    }, 80);
 
     return () => clearInterval(intervalRef.current);
   }, [value]);
