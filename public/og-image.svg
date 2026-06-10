@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#060a0a"/>
+  <!-- Top red bar -->
+  <rect width="400" height="3" fill="#be1823"/>
+  <!-- Left pulse line -->
+  <rect x="40" y="80" width="2" height="470" fill="url(#pulse)"/>
+  <defs>
+    <linearGradient id="pulse" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#060a0a"/>
+      <stop offset="50%" stop-color="#be1823"/>
+      <stop offset="100%" stop-color="#060a0a"/>
+    </linearGradient>
+  </defs>
+  <!-- ECG line -->
+  <polyline points="70,420 200,420 240,420 260,370 275,480 290,360 310,420 400,420 430,420 448,395 460,420 600,420 1130,420"
+    fill="none" stroke="#be1823" stroke-width="2.5" opacity="0.8"/>
+  <!-- Label -->
+  <text x="80" y="200" font-family="monospace" font-size="18" fill="#00ff88" letter-spacing="6">ІФНМУ · НМТ · 2026</text>
+  <!-- Title -->
+  <text x="80" y="290" font-family="monospace" font-size="72" fill="#ffffff" letter-spacing="-2">КОНКУРСНИЙ</text>
+  <text x="80" y="380" font-family="monospace" font-size="72" fill="transparent"
+    stroke="#be1823" stroke-width="2">БАЛ</text>
+  <!-- Subtitle -->
+  <text x="80" y="530" font-family="monospace" font-size="16" fill="#7ab89a" letter-spacing="3">// розрахунок · Галузь І · Порядок прийому МОН 2026 //</text>
+  <!-- Bottom red bar -->
+  <rect x="800" y="627" width="400" height="3" fill="#be1823"/>
+</svg>

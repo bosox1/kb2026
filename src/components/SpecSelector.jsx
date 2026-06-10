@@ -15,12 +15,12 @@ export default function SpecSelector({ selected, onSelect }) {
               style={{ color: isActive ? '#00ff88' : '#5ecf94' }}>
               {spec.code}
             </span>
-            <span className="relative z-10 block text-sm leading-snug"
+            <span className="relative z-10 block text-xs sm:text-sm leading-snug"
               style={{ color: '#e8f5ef' }}>
               {spec.name}
             </span>
             {spec.subtitle && (
-              <span className="relative z-10 block text-[11px] mt-0.5"
+              <span className="relative z-10 block text-[10px] sm:text-[11px] mt-0.5"
                 style={{ color: '#7ab89a' }}>
                 {spec.subtitle}
               </span>

@@ -102,7 +102,7 @@ export default function App() {
         }} />
       </div>
 
-      <div className="max-w-2xl mx-auto px-6 sm:px-10 py-12 pb-20">
+      <div className="max-w-2xl mx-auto px-4 sm:px-10 py-8 sm:py-12 pb-20">
 
         {/* Header */}
         <header className="mb-12">
@@ -113,7 +113,7 @@ export default function App() {
 
           <div className="animate-fadein-1" style={{
             fontFamily: "'Share Tech Mono', monospace",
-            fontSize: 'clamp(2.4rem, 9vw, 4.8rem)',
+            fontSize: 'clamp(2rem, 11vw, 4.8rem)',
             lineHeight: 1.0,
             letterSpacing: '-0.02em',
             fontWeight: 400,
@@ -226,7 +226,7 @@ export default function App() {
 
         {/* Result */}
         <section className="reveal">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 p-6"
+          <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between p-4 sm:p-6"
             style={{
               border: '1px solid rgba(0,255,136,0.2)',
               background: 'linear-gradient(135deg, rgba(0,255,136,0.04) 0%, transparent 70%)',
@@ -238,7 +238,7 @@ export default function App() {
               </p>
               <div className={result ? 'result-score' : ''} style={!result ? {
                 fontFamily: 'Share Tech Mono, monospace',
-                fontSize: 'clamp(3.5rem, 10vw, 5.5rem)',
+                fontSize: 'clamp(3rem, 15vw, 5.5rem)',
                 color: 'rgba(212,237,230,0.2)',
                 lineHeight: 1,
               } : {}}>
