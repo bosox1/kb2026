@@ -4,8 +4,8 @@ export default function ScoreInput({ label, hint, coef, value, onChange, disable
   return (
     <div className="grid grid-cols-[1fr_56px_140px] gap-2 items-center py-2.5">
       <div>
-        <div className="text-sm" style={{ color: '#1a1a1a' }}>{label}</div>
-        {hint && <div className="text-xs mt-0.5 tracking-wide" style={{ color: 'rgba(26,26,26,0.4)' }}>{hint}</div>}
+        <div className="text-sm" style={{ color: '#e8f5ef' }}>{label}</div>
+        {hint && <div className="text-xs mt-0.5 tracking-wide" style={{ color: '#7ab89a' }}>{hint}</div>}
       </div>
       <div className="coef-badge">{coef !== null && coef !== undefined ? fmt(coef) : '—'}</div>
       <input
