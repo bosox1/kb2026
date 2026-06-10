@@ -9,13 +9,13 @@ export default function SpecSelector({ selected, onSelect }) {
           <button
             key={spec.code}
             onClick={() => onSelect(spec)}
-            className={`text-left px-3 py-2.5 rounded-lg border text-sm font-medium transition-all leading-snug
+            className={`text-left px-3 py-3 rounded-xl border-2 text-sm font-medium transition-all leading-snug
               ${isActive
-                ? 'border-blue-500 bg-blue-50 text-blue-800'
-                : 'border-gray-200 bg-white text-gray-800 hover:border-blue-300 hover:bg-blue-50/50'
+                ? 'border-blue-500 bg-blue-50 text-blue-800 shadow-sm'
+                : 'border-gray-100 bg-gray-50 text-gray-700 hover:border-blue-200 hover:bg-blue-50/50'
               }`}
           >
-            <span className={`block text-[10px] font-normal mb-0.5 ${isActive ? 'text-blue-400' : 'text-gray-400'}`}>
+            <span className={`block text-[10px] font-bold mb-1 uppercase tracking-wider ${isActive ? 'text-blue-400' : 'text-gray-400'}`}>
               {spec.code}
             </span>
             {spec.name}
