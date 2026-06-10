@@ -2,6 +2,7 @@ import { useState, useCallback } from 'react';
 import SpecSelector from './components/SpecSelector';
 import ScoreInput from './components/ScoreInput';
 import EcgLine from './components/EcgLine';
+import MatrixResult from './components/MatrixResult';
 import { SUBJECTS } from './data/specs';
 import { useReveal } from './hooks/useReveal';
 
@@ -9,7 +10,7 @@ const fmt = (n) => n?.toFixed(2).replace('.', ',') ?? '—';
 
 function Label({ children }) {
   return (
-    <p className="text-xs tracking-widest uppercase mb-4" style={{ color: 'rgba(0,255,136,0.6)' }}>
+    <p className="text-xs tracking-widest uppercase mb-4" style={{ color: '#00ff88' }}>
       // {children} //
     </p>
   );
@@ -18,9 +19,9 @@ function Label({ children }) {
 function Divider() {
   return (
     <div className="flex items-center gap-4 my-8">
-      <div className="flex-1 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(190,24,35,0.5), transparent)' }} />
-      <span className="text-xs" style={{ color: 'rgba(190,24,35,0.6)' }}>✦</span>
-      <div className="flex-1 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(190,24,35,0.5), transparent)' }} />
+      <div className="flex-1 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(190,24,35,0.6), transparent)' }} />
+      <span style={{ color: 'rgba(190,24,35,0.7)' }}>✦</span>
+      <div className="flex-1 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(190,24,35,0.6), transparent)' }} />
     </div>
   );
 }
@@ -90,27 +91,26 @@ export default function App() {
   return (
     <div className="min-h-screen" style={{ background: '#060a0a' }}>
 
-      {/* Left pulse line — червоний ІФНМУ */}
-      <div className="fixed left-3 top-0 bottom-0 pointer-events-none" style={{ width: '1px', zIndex: 10 }}>
+      {/* Top bar — червоний */}
+      <div style={{ height: '2px', background: 'linear-gradient(90deg, #be1823, rgba(190,24,35,0.3), transparent)' }} />
+
+      {/* Left pulse line */}
+      <div className="fixed left-3 top-0 bottom-0 pointer-events-none" style={{ zIndex: 10 }}>
         <div className="animate-pulse-line" style={{
           position: 'absolute', top: '10%', width: '2px', height: '80%',
           background: 'linear-gradient(180deg, transparent, #be1823, transparent)'
         }} />
       </div>
 
-      {/* Top accent bar — червоний ІФНМУ */}
-      <div style={{ height: '2px', background: 'linear-gradient(90deg, #be1823, rgba(190,24,35,0.3), transparent)' }} />
-
       <div className="max-w-2xl mx-auto px-6 sm:px-10 py-12 pb-20">
 
         {/* Header */}
         <header className="mb-12">
           <p className="text-xs tracking-[0.45em] uppercase mb-5 animate-fadein-0"
-            style={{ color: 'rgba(0,255,136,0.5)' }}>
+            style={{ color: '#00ff88' }}>
             ІФНМУ · НМТ · 2026
           </p>
 
-          {/* Заголовок без glitch на переносі — два окремих рядки */}
           <div className="animate-fadein-1" style={{
             fontFamily: "'Share Tech Mono', monospace",
             fontSize: 'clamp(2.4rem, 9vw, 4.8rem)',
@@ -118,27 +118,20 @@ export default function App() {
             letterSpacing: '-0.02em',
             fontWeight: 400,
           }}>
-            {/* КОНКУРСНИЙ — з glitch */}
-            <div
-              className="glitch"
-              data-text="КОНКУРСНИЙ"
-              style={{ color: '#d4ede6', display: 'block' }}
-            >
+            <div className="glitch" data-text="КОНКУРСНИЙ" style={{ color: '#ffffff', display: 'block' }}>
               КОНКУРСНИЙ
             </div>
-            {/* БАЛ — outline червоним, без glitch */}
             <div style={{
               color: 'transparent',
               WebkitTextStroke: '1.5px #be1823',
-              textShadow: '0 0 25px rgba(190,24,35,0.35)',
+              textShadow: '0 0 25px rgba(190,24,35,0.4)',
               display: 'block',
             }}>
               БАЛ
             </div>
           </div>
 
-          <p className="mt-5 text-xs tracking-[0.2em] animate-fadein-2"
-            style={{ color: 'rgba(212,237,230,0.35)' }}>
+          <p className="mt-5 text-xs tracking-[0.2em] animate-fadein-2" style={{ color: '#a0c8b8' }}>
             // розрахунок · Галузь І · МОН 2026 //
           </p>
 
@@ -151,7 +144,7 @@ export default function App() {
         <section className="reveal mb-8">
           <Label>01 · Оберіть спеціальність</Label>
           <SpecSelector selected={spec} onSelect={handleSpecSelect} />
-          <p className="text-xs mt-3 tracking-wide" style={{ color: 'rgba(212,237,230,0.2)' }}>
+          <p className="text-xs mt-3 tracking-wide" style={{ color: '#7ab89a' }}>
             ↳ після вибору коефіцієнти підставляться автоматично
           </p>
         </section>
@@ -164,13 +157,11 @@ export default function App() {
 
           <div className="grid grid-cols-[1fr_56px_140px] gap-2 mb-1">
             <span />
-            <span className="text-[10px] tracking-widest text-center uppercase"
-              style={{ color: 'rgba(0,255,136,0.4)' }}>К</span>
-            <span className="text-[10px] tracking-widest text-center uppercase"
-              style={{ color: 'rgba(212,237,230,0.3)' }}>Оцінка</span>
+            <span className="text-[10px] tracking-widest text-center uppercase" style={{ color: '#00ff88' }}>К</span>
+            <span className="text-[10px] tracking-widest text-center uppercase" style={{ color: '#a0c8b8' }}>Оцінка</span>
           </div>
 
-          <div style={{ borderTop: '1px solid rgba(0,255,136,0.1)' }}>
+          <div style={{ borderTop: '1px solid rgba(0,255,136,0.15)' }}>
             {[
               { key: 'p1', label: 'Українська мова', hint: "обов'язковий", coef: spec?.k1 ?? 0.35 },
               { key: 'p2', label: 'Математика',      hint: "обов'язковий", coef: spec?.k2 ?? 0.40 },
@@ -179,7 +170,7 @@ export default function App() {
                 hint: subjKey ? SUBJECTS.find(s => s.key === subjKey)?.label : 'оберіть зі списку нижче',
                 coef: k4, disabled: !subjKey },
             ].map(({ key, label, hint, coef, disabled }) => (
-              <div key={key} style={{ borderBottom: '1px solid rgba(0,255,136,0.07)' }}>
+              <div key={key} style={{ borderBottom: '1px solid rgba(0,255,136,0.08)' }}>
                 <ScoreInput label={label} hint={hint} coef={coef}
                   value={scores[key]} onChange={(v) => handleScore(key, v)}
                   disabled={disabled} />
@@ -206,7 +197,7 @@ export default function App() {
         {/* Fixed params */}
         <section className="reveal mb-8">
           <Label>03 · Фіксовані параметри ІФНМУ</Label>
-          <p className="text-xs leading-relaxed mb-5" style={{ color: 'rgba(212,237,230,0.4)' }}>
+          <p className="text-xs leading-relaxed mb-5" style={{ color: '#c8e8d8' }}>
             ОУ = 0 — не закінчували підготовчих курсів ІФНМУ у рік вступу<br />
             РК = 1,00 — університет знаходиться у вашому регіоні<br />
             ГК = 1,00 — для ІФНМУ
@@ -214,9 +205,9 @@ export default function App() {
           <div className="grid grid-cols-3 gap-3">
             {[['ОУ', '0'], ['РК', '1,00'], ['ГК', '1,00']].map(([lbl, val]) => (
               <div key={lbl} className="text-center py-3"
-                style={{ border: '1px solid rgba(190,24,35,0.3)', background: 'rgba(190,24,35,0.05)' }}>
-                <div className="text-xs tracking-widest mb-1" style={{ color: 'rgba(190,24,35,0.7)' }}>{lbl}</div>
-                <div className="text-lg" style={{ color: '#d4ede6', fontFamily: 'Share Tech Mono, monospace' }}>{val}</div>
+                style={{ border: '1px solid rgba(190,24,35,0.35)', background: 'rgba(190,24,35,0.06)' }}>
+                <div className="text-xs tracking-widest mb-1" style={{ color: '#ff6070' }}>{lbl}</div>
+                <div className="text-lg" style={{ color: '#ffffff', fontFamily: 'Share Tech Mono, monospace' }}>{val}</div>
               </div>
             ))}
           </div>
@@ -226,7 +217,7 @@ export default function App() {
         {errors.length > 0 && (
           <div className="mb-6 p-4" style={{ border: '1px solid rgba(190,24,35,0.5)', background: 'rgba(190,24,35,0.08)' }}>
             {errors.map((e, i) => (
-              <div key={i} className="text-xs tracking-wider mb-1" style={{ color: '#ff6060' }}>
+              <div key={i} className="text-xs tracking-wider mb-1" style={{ color: '#ff7070' }}>
                 ✗ {e}
               </div>
             ))}
@@ -242,16 +233,16 @@ export default function App() {
               boxShadow: result ? '0 0 40px rgba(0,255,136,0.08)' : 'none'
             }}>
             <div>
-              <p className="text-xs tracking-widest uppercase mb-3" style={{ color: 'rgba(0,255,136,0.5)' }}>
+              <p className="text-xs tracking-widest uppercase mb-3" style={{ color: '#00ff88' }}>
                 // конкурсний бал //
               </p>
               <div className={result ? 'result-score' : ''} style={!result ? {
                 fontFamily: 'Share Tech Mono, monospace',
                 fontSize: 'clamp(3.5rem, 10vw, 5.5rem)',
-                color: 'rgba(212,237,230,0.15)',
+                color: 'rgba(212,237,230,0.2)',
                 lineHeight: 1,
               } : {}}>
-                {result ?? '—'}
+                <MatrixResult value={result} />
               </div>
               {result && parseFloat(result) >= 180 && (
                 <p className="text-xs mt-2 tracking-wider" style={{ color: '#00ff88' }}>
@@ -267,18 +258,17 @@ export default function App() {
 
         {/* Footer */}
         <footer className="mt-14 pt-6" style={{ borderTop: '1px solid rgba(190,24,35,0.2)' }}>
-          <p className="text-xs leading-relaxed text-center" style={{ color: 'rgba(212,237,230,0.25)' }}>
+          <p className="text-xs leading-relaxed text-center" style={{ color: '#7ab89a' }}>
             ⚠ Калькулятор носить інформаційний характер.<br />
             Коефіцієнти — Додаток 10 до Порядку прийому МОН 2026, Галузь І.<br />
             <a href="https://vstup.edbo.gov.ua/konkurs-calculator" target="_blank" rel="noopener noreferrer"
-              style={{ color: 'rgba(190,24,35,0.7)', textDecoration: 'underline' }}>
+              style={{ color: '#be1823', textDecoration: 'underline' }}>
               vstup.edbo.gov.ua/konkurs-calculator
             </a>
           </p>
         </footer>
       </div>
 
-      {/* Bottom accent bar */}
       <div style={{ height: '2px', background: 'linear-gradient(90deg, transparent, rgba(190,24,35,0.3), #be1823)' }} />
     </div>
   );
