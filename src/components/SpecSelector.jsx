@@ -12,16 +12,16 @@ export default function SpecSelector({ selected, onSelect }) {
             className={`spec-card ${isActive ? 'active' : ''}`}
           >
             <span className="relative z-10 block text-[10px] tracking-widest uppercase mb-1"
-              style={{ color: isActive ? '#00ff88' : 'rgba(212,237,230,0.3)' }}>
+              style={{ color: isActive ? '#BE1622' : 'rgba(26,26,26,0.35)' }}>
               {spec.code}
             </span>
-            <span className="relative z-10 block text-sm font-medium leading-snug"
-              style={{ color: isActive ? '#d4ede6' : 'rgba(212,237,230,0.7)' }}>
+            <span className="relative z-10 block text-sm leading-snug"
+              style={{ color: isActive ? '#1a1a1a' : 'rgba(26,26,26,0.7)' }}>
               {spec.name}
             </span>
             {spec.subtitle && (
               <span className="relative z-10 block text-[11px] mt-0.5"
-                style={{ color: 'rgba(212,237,230,0.35)' }}>
+                style={{ color: 'rgba(26,26,26,0.4)' }}>
                 {spec.subtitle}
               </span>
             )}

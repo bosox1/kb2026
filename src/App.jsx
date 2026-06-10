@@ -18,9 +18,9 @@ function Label({ children }) {
 function Divider() {
   return (
     <div className="flex items-center gap-4 my-8">
-      <div className="flex-1 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(0,255,136,0.3), transparent)' }} />
-      <span className="text-xs tracking-widest" style={{ color: 'rgba(0,255,136,0.4)' }}>✦</span>
-      <div className="flex-1 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(0,255,136,0.3), transparent)' }} />
+      <div className="flex-1 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(190,24,35,0.5), transparent)' }} />
+      <span className="text-xs" style={{ color: 'rgba(190,24,35,0.6)' }}>✦</span>
+      <div className="flex-1 h-px" style={{ background: 'linear-gradient(90deg, transparent, rgba(190,24,35,0.5), transparent)' }} />
     </div>
   );
 }
@@ -58,19 +58,19 @@ export default function App() {
 
   const calculate = () => {
     const errs = [];
-    if (!spec) errs.push('ОБЕРІТЬ СПЕЦІАЛЬНІСТЬ');
-    if (!subjKey) errs.push('ОБЕРІТЬ ПРЕДМЕТ НА ВИБІР');
+    if (!spec) errs.push('Оберіть спеціальність');
+    if (!subjKey) errs.push('Оберіть предмет на вибір');
 
     const p1 = parseFloat(scores.p1) || 0;
     const p2 = parseFloat(scores.p2) || 0;
     const p3 = parseFloat(scores.p3) || 0;
     const p4 = parseFloat(scores.p4) || 0;
 
-    if (!p1 || !p2 || !p3) errs.push('ВВЕДІТЬ ОЦІНКИ З ТРЬОХ ОБОВ\'ЯЗКОВИХ ПРЕДМЕТІВ');
-    if (!p4) errs.push('ВВЕДІТЬ ОЦІНКУ З ПРЕДМЕТУ НА ВИБІР');
+    if (!p1 || !p2 || !p3) errs.push("Введіть оцінки з трьох обов'язкових предметів");
+    if (!p4) errs.push('Введіть оцінку з предмету на вибір');
 
-    [['УКР. МОВА', p1], ['МАТЕМАТИКА', p2], ['ІСТОРІЯ', p3], ['ПРЕДМЕТ НА ВИБІР', p4]].forEach(([n, p]) => {
-      if (p && (p < 100 || p > 200)) errs.push(`${n}: ОЦІНКА ПОЗА ДІАПАЗОНОМ 100–200`);
+    [['Укр. мова', p1], ['Математика', p2], ['Історія', p3], ['Предмет на вибір', p4]].forEach(([n, p]) => {
+      if (p && (p < 100 || p > 200)) errs.push(`${n}: оцінка поза діапазоном 100–200`);
     });
 
     setErrors(errs);
@@ -84,66 +84,74 @@ export default function App() {
   };
 
   const subjOptions = spec
-    ? SUBJECTS.map((s) => {
-        const coef = spec.vk[s.key];
-        const isMax = coef === k4max;
-        return { ...s, coef, isMax };
-      })
+    ? SUBJECTS.map((s) => ({ ...s, coef: spec.vk[s.key], isMax: spec.vk[s.key] === k4max }))
     : [];
 
   return (
     <div className="min-h-screen" style={{ background: '#060a0a' }}>
 
-      {/* Vertical pulse line */}
-      <div className="fixed left-4 top-0 bottom-0 pointer-events-none" style={{ width: '1px', zIndex: 10 }}>
+      {/* Left pulse line — червоний ІФНМУ */}
+      <div className="fixed left-3 top-0 bottom-0 pointer-events-none" style={{ width: '1px', zIndex: 10 }}>
         <div className="animate-pulse-line" style={{
-          position: 'absolute', top: '10%', width: '1px', height: '80%',
-          background: 'linear-gradient(180deg, transparent, #00ff88, transparent)'
+          position: 'absolute', top: '10%', width: '2px', height: '80%',
+          background: 'linear-gradient(180deg, transparent, #be1823, transparent)'
         }} />
       </div>
+
+      {/* Top accent bar — червоний ІФНМУ */}
+      <div style={{ height: '2px', background: 'linear-gradient(90deg, #be1823, rgba(190,24,35,0.3), transparent)' }} />
 
       <div className="max-w-2xl mx-auto px-6 sm:px-10 py-12 pb-20">
 
         {/* Header */}
-        <header className="mb-14">
-          <p className="text-xs tracking-[0.5em] uppercase mb-6 animate-fadein-0" style={{ color: 'rgba(0,255,136,0.5)' }}>
+        <header className="mb-12">
+          <p className="text-xs tracking-[0.45em] uppercase mb-5 animate-fadein-0"
+            style={{ color: 'rgba(0,255,136,0.5)' }}>
             ІФНМУ · НМТ · 2026
           </p>
 
-          <h1
-            className="glitch animate-fadein-1"
-            data-text="КОНКУРСНИЙ БАЛ"
-            style={{
-              fontFamily: "'Share Tech Mono', monospace",
-              fontSize: 'clamp(2rem, 8vw, 4.5rem)',
-              lineHeight: 0.95,
-              letterSpacing: '-0.02em',
-              color: '#d4ede6',
-              fontWeight: 400,
-            }}
-          >
-            КОНКУРСНИЙ<br />
-            <span style={{
+          {/* Заголовок без glitch на переносі — два окремих рядки */}
+          <div className="animate-fadein-1" style={{
+            fontFamily: "'Share Tech Mono', monospace",
+            fontSize: 'clamp(2.4rem, 9vw, 4.8rem)',
+            lineHeight: 1.0,
+            letterSpacing: '-0.02em',
+            fontWeight: 400,
+          }}>
+            {/* КОНКУРСНИЙ — з glitch */}
+            <div
+              className="glitch"
+              data-text="КОНКУРСНИЙ"
+              style={{ color: '#d4ede6', display: 'block' }}
+            >
+              КОНКУРСНИЙ
+            </div>
+            {/* БАЛ — outline червоним, без glitch */}
+            <div style={{
               color: 'transparent',
-              WebkitTextStroke: '1px #00ff88',
-              textShadow: '0 0 30px rgba(0,255,136,0.3)'
-            }}>БАЛ</span>
-          </h1>
+              WebkitTextStroke: '1.5px #be1823',
+              textShadow: '0 0 25px rgba(190,24,35,0.35)',
+              display: 'block',
+            }}>
+              БАЛ
+            </div>
+          </div>
 
-          <p className="mt-6 text-xs tracking-[0.25em] animate-fadein-2" style={{ color: 'rgba(212,237,230,0.35)' }}>
-            // розрахунок конкурсного балу · Галузь І · Порядок прийому МОН 2026 //
+          <p className="mt-5 text-xs tracking-[0.2em] animate-fadein-2"
+            style={{ color: 'rgba(212,237,230,0.35)' }}>
+            // розрахунок · Галузь І · МОН 2026 //
           </p>
 
-          <div className="mt-8 animate-fadein-3">
+          <div className="mt-7 animate-fadein-3">
             <EcgLine />
           </div>
         </header>
 
         {/* Step 1 */}
-        <section className="reveal mb-10">
+        <section className="reveal mb-8">
           <Label>01 · Оберіть спеціальність</Label>
           <SpecSelector selected={spec} onSelect={handleSpecSelect} />
-          <p className="text-xs mt-3 tracking-wider" style={{ color: 'rgba(212,237,230,0.2)' }}>
+          <p className="text-xs mt-3 tracking-wide" style={{ color: 'rgba(212,237,230,0.2)' }}>
             ↳ після вибору коефіцієнти підставляться автоматично
           </p>
         </section>
@@ -154,52 +162,33 @@ export default function App() {
         <section className="reveal mb-8">
           <Label>02 · Оцінки НМТ</Label>
 
-          {/* Col headers */}
-          <div className="grid grid-cols-[1fr_56px_140px] gap-2 mb-3 px-0">
+          <div className="grid grid-cols-[1fr_56px_140px] gap-2 mb-1">
             <span />
-            <span className="text-[10px] tracking-widest text-center uppercase" style={{ color: 'rgba(0,255,136,0.4)' }}>К</span>
-            <span className="text-[10px] tracking-widest text-center uppercase" style={{ color: 'rgba(0,255,136,0.4)' }}>Оцінка</span>
+            <span className="text-[10px] tracking-widest text-center uppercase"
+              style={{ color: 'rgba(0,255,136,0.4)' }}>К</span>
+            <span className="text-[10px] tracking-widest text-center uppercase"
+              style={{ color: 'rgba(212,237,230,0.3)' }}>Оцінка</span>
           </div>
 
-          {/* Divider line */}
-          <div className="mb-3" style={{ height: '1px', background: 'rgba(0,255,136,0.1)' }} />
-
-          <div>
+          <div style={{ borderTop: '1px solid rgba(0,255,136,0.1)' }}>
             {[
-              { key: 'p1', label: 'Українська мова', hint: 'обов\'язковий', coef: spec?.k1 ?? 0.35 },
-              { key: 'p2', label: 'Математика', hint: 'обов\'язковий', coef: spec?.k2 ?? 0.40 },
-              { key: 'p3', label: 'Історія України', hint: 'обов\'язковий', coef: spec?.k3 ?? 0.25 },
-            ].map(({ key, label, hint, coef }, i) => (
+              { key: 'p1', label: 'Українська мова', hint: "обов'язковий", coef: spec?.k1 ?? 0.35 },
+              { key: 'p2', label: 'Математика',      hint: "обов'язковий", coef: spec?.k2 ?? 0.40 },
+              { key: 'p3', label: 'Історія України', hint: "обов'язковий", coef: spec?.k3 ?? 0.25 },
+              { key: 'p4', label: 'Предмет на вибір',
+                hint: subjKey ? SUBJECTS.find(s => s.key === subjKey)?.label : 'оберіть зі списку нижче',
+                coef: k4, disabled: !subjKey },
+            ].map(({ key, label, hint, coef, disabled }) => (
               <div key={key} style={{ borderBottom: '1px solid rgba(0,255,136,0.07)' }}>
-                <ScoreInput
-                  label={label}
-                  hint={hint}
-                  coef={coef}
-                  value={scores[key]}
-                  onChange={(v) => handleScore(key, v)}
-                />
+                <ScoreInput label={label} hint={hint} coef={coef}
+                  value={scores[key]} onChange={(v) => handleScore(key, v)}
+                  disabled={disabled} />
               </div>
             ))}
-
-            <div style={{ borderBottom: '1px solid rgba(0,255,136,0.07)' }}>
-              <ScoreInput
-                label="Предмет на вибір"
-                hint={subjKey ? SUBJECTS.find((s) => s.key === subjKey)?.label : 'оберіть зі списку нижче'}
-                coef={k4}
-                value={scores.p4}
-                onChange={(v) => handleScore('p4', v)}
-                disabled={!subjKey}
-              />
-            </div>
           </div>
 
           <div className="mt-3">
-            <select
-              value={subjKey}
-              onChange={handleSubjChange}
-              disabled={!spec}
-              className="med-select"
-            >
+            <select value={subjKey} onChange={handleSubjChange} disabled={!spec} className="med-select">
               <option value="">
                 {spec ? '— оберіть предмет на вибір —' : '— спочатку оберіть спеціальність —'}
               </option>
@@ -215,18 +204,19 @@ export default function App() {
         <Divider />
 
         {/* Fixed params */}
-        <section className="reveal mb-10">
+        <section className="reveal mb-8">
           <Label>03 · Фіксовані параметри ІФНМУ</Label>
-          <p className="text-xs leading-relaxed mb-5" style={{ color: 'rgba(212,237,230,0.45)' }}>
-            ОУ = 0 — не закінчували підготовчих курсів ІФНМУ<br />
-            РК = 1,00 — університет у вашому регіоні<br />
+          <p className="text-xs leading-relaxed mb-5" style={{ color: 'rgba(212,237,230,0.4)' }}>
+            ОУ = 0 — не закінчували підготовчих курсів ІФНМУ у рік вступу<br />
+            РК = 1,00 — університет знаходиться у вашому регіоні<br />
             ГК = 1,00 — для ІФНМУ
           </p>
           <div className="grid grid-cols-3 gap-3">
             {[['ОУ', '0'], ['РК', '1,00'], ['ГК', '1,00']].map(([lbl, val]) => (
-              <div key={lbl} className="text-center py-3" style={{ border: '1px solid rgba(0,255,136,0.15)', background: 'rgba(0,255,136,0.03)' }}>
-                <div className="text-xs tracking-widest mb-1" style={{ color: 'rgba(0,255,136,0.5)' }}>{lbl}</div>
-                <div className="text-lg" style={{ color: '#00ff88', fontFamily: 'Share Tech Mono, monospace' }}>{val}</div>
+              <div key={lbl} className="text-center py-3"
+                style={{ border: '1px solid rgba(190,24,35,0.3)', background: 'rgba(190,24,35,0.05)' }}>
+                <div className="text-xs tracking-widest mb-1" style={{ color: 'rgba(190,24,35,0.7)' }}>{lbl}</div>
+                <div className="text-lg" style={{ color: '#d4ede6', fontFamily: 'Share Tech Mono, monospace' }}>{val}</div>
               </div>
             ))}
           </div>
@@ -234,7 +224,7 @@ export default function App() {
 
         {/* Errors */}
         {errors.length > 0 && (
-          <div className="mb-6 p-4" style={{ border: '1px solid rgba(255,80,80,0.4)', background: 'rgba(255,80,80,0.05)' }}>
+          <div className="mb-6 p-4" style={{ border: '1px solid rgba(190,24,35,0.5)', background: 'rgba(190,24,35,0.08)' }}>
             {errors.map((e, i) => (
               <div key={i} className="text-xs tracking-wider mb-1" style={{ color: '#ff6060' }}>
                 ✗ {e}
@@ -245,11 +235,12 @@ export default function App() {
 
         {/* Result */}
         <section className="reveal">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 p-6" style={{
-            border: '1px solid rgba(0,255,136,0.2)',
-            background: 'linear-gradient(135deg, rgba(0,255,136,0.04) 0%, transparent 70%)',
-            boxShadow: result ? '0 0 40px rgba(0,255,136,0.08)' : 'none'
-          }}>
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 p-6"
+            style={{
+              border: '1px solid rgba(0,255,136,0.2)',
+              background: 'linear-gradient(135deg, rgba(0,255,136,0.04) 0%, transparent 70%)',
+              boxShadow: result ? '0 0 40px rgba(0,255,136,0.08)' : 'none'
+            }}>
             <div>
               <p className="text-xs tracking-widest uppercase mb-3" style={{ color: 'rgba(0,255,136,0.5)' }}>
                 // конкурсний бал //
@@ -258,7 +249,7 @@ export default function App() {
                 fontFamily: 'Share Tech Mono, monospace',
                 fontSize: 'clamp(3.5rem, 10vw, 5.5rem)',
                 color: 'rgba(212,237,230,0.15)',
-                lineHeight: 1
+                lineHeight: 1,
               } : {}}>
                 {result ?? '—'}
               </div>
@@ -268,7 +259,6 @@ export default function App() {
                 </p>
               )}
             </div>
-
             <button onClick={calculate} className="btn-calc">
               Розрахувати
             </button>
@@ -276,21 +266,20 @@ export default function App() {
         </section>
 
         {/* Footer */}
-        <footer className="mt-14 pt-6" style={{ borderTop: '1px solid rgba(0,255,136,0.1)' }}>
+        <footer className="mt-14 pt-6" style={{ borderTop: '1px solid rgba(190,24,35,0.2)' }}>
           <p className="text-xs leading-relaxed text-center" style={{ color: 'rgba(212,237,230,0.25)' }}>
             ⚠ Калькулятор носить інформаційний характер.<br />
             Коефіцієнти — Додаток 10 до Порядку прийому МОН 2026, Галузь І.<br />
-            <a
-              href="https://vstup.edbo.gov.ua/konkurs-calculator"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ color: 'rgba(0,255,136,0.5)', textDecoration: 'underline' }}
-            >
+            <a href="https://vstup.edbo.gov.ua/konkurs-calculator" target="_blank" rel="noopener noreferrer"
+              style={{ color: 'rgba(190,24,35,0.7)', textDecoration: 'underline' }}>
               vstup.edbo.gov.ua/konkurs-calculator
             </a>
           </p>
         </footer>
       </div>
+
+      {/* Bottom accent bar */}
+      <div style={{ height: '2px', background: 'linear-gradient(90deg, transparent, rgba(190,24,35,0.3), #be1823)' }} />
     </div>
   );
 }
