@@ -9,18 +9,21 @@ export default function SpecSelector({ selected, onSelect }) {
           <button
             key={spec.code}
             onClick={() => onSelect(spec)}
-            className={`text-left px-3 py-3 rounded-xl border-2 text-sm font-medium transition-all leading-snug
-              ${isActive
-                ? 'border-blue-500 bg-blue-50 text-blue-800 shadow-sm'
-                : 'border-gray-100 bg-gray-50 text-gray-700 hover:border-blue-200 hover:bg-blue-50/50'
-              }`}
+            className={`spec-card ${isActive ? 'active' : ''}`}
           >
-            <span className={`block text-[10px] font-bold mb-1 uppercase tracking-wider ${isActive ? 'text-blue-400' : 'text-gray-400'}`}>
+            <span className="relative z-10 block text-[10px] tracking-widest uppercase mb-1"
+              style={{ color: isActive ? '#00ff88' : 'rgba(212,237,230,0.3)' }}>
               {spec.code}
             </span>
-            {spec.name}
+            <span className="relative z-10 block text-sm font-medium leading-snug"
+              style={{ color: isActive ? '#d4ede6' : 'rgba(212,237,230,0.7)' }}>
+              {spec.name}
+            </span>
             {spec.subtitle && (
-              <span className="block text-[11px] font-normal text-gray-400 mt-0.5">{spec.subtitle}</span>
+              <span className="relative z-10 block text-[11px] mt-0.5"
+                style={{ color: 'rgba(212,237,230,0.35)' }}>
+                {spec.subtitle}
+              </span>
             )}
           </button>
         );
