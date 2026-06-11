@@ -132,7 +132,7 @@ export default function App() {
           </div>
 
           <p className="mt-5 text-xs tracking-[0.2em] animate-fadein-2" style={{ color: '#a0c8b8' }}>
-            // розрахунок · Галузь І · МОН 2026 //
+            // розрахунок · Галузь І //
           </p>
 
           <div className="mt-7 animate-fadein-3">
@@ -144,7 +144,7 @@ export default function App() {
         <section className="reveal mb-8">
           <Label>01 · Оберіть спеціальність</Label>
           <SpecSelector selected={spec} onSelect={handleSpecSelect} />
-          <p className="text-xs mt-3 tracking-wide" style={{ color: '#7ab89a' }}>
+          <p className="text-base mt-3 tracking-wide" style={{ color: '#7ab89a' }}>
             ↳ після вибору коефіцієнти підставляться автоматично
           </p>
         </section>
@@ -198,9 +198,9 @@ export default function App() {
         <section className="reveal mb-8">
           <Label>03 · Фіксовані параметри ІФНМУ</Label>
           <p className="text-xs leading-relaxed mb-5" style={{ color: '#c8e8d8' }}>
-            ОУ = 0 — не закінчували підготовчих курсів ІФНМУ у рік вступу<br />
-            РК = 1,00 — університет знаходиться у вашому регіоні<br />
-            ГК = 1,00 — для ІФНМУ
+            ОУ = 0 — "Оцінка успішності" - спеціальності ІФНМУ не передбачають оцінку успішності<br />
+            РК = 1,00 — "Регіональний коефіцієнт" - для ІФНМУ становить 1.00<br />
+            ГК = 1,00 — "Галузевий коефіцієнт" - для ІФНМУ становить 1.00
           </p>
           <div className="grid grid-cols-3 gap-3">
             {[['ОУ', '0'], ['РК', '1,00'], ['ГК', '1,00']].map(([lbl, val]) => (
@@ -258,9 +258,11 @@ export default function App() {
 
         {/* Footer */}
         <footer className="mt-14 pt-6" style={{ borderTop: '1px solid rgba(190,24,35,0.2)' }}>
-          <p className="text-xs leading-relaxed text-center" style={{ color: '#7ab89a' }}>
+          <p className="text-base font-semibold leading-relaxed text-center" style={{ color: '#7ab89a' }}>
             ⚠ Калькулятор носить інформаційний характер.<br />
+            Калькуляція здійснюється для всутупу на спеціальності ІФНМУ з відповідними коефіцієнтами.<br />
             Коефіцієнти — Додаток 10 до Порядку прийому МОН 2026, Галузь І.<br />
+            Перевірте свій конкурсний бал на офіційному сайті ЄДБО за посиланням нижче.<br />
             <a href="https://vstup.edbo.gov.ua/konkurs-calculator" target="_blank" rel="noopener noreferrer"
               style={{ color: '#be1823', textDecoration: 'underline' }}>
               vstup.edbo.gov.ua/konkurs-calculator
